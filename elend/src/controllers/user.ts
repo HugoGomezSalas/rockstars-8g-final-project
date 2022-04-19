@@ -5,16 +5,54 @@ import {
   UserModel,
 } from "../models/user";
 
+import jwt from "jsonwebtoken";
+
+const SECRET_KEY = process.env.SECRET_KEY || "";
+
 export const login = async ({ password, email, userName }: LoginDTO) => {
-  if (!password) return;
+  if (!password)
+    return {
+      status: 400,
+      error: "password is required",
+    };
+
+  let user = undefined;
 
   if (email) {
-    return await loginEmail({ email, password });
+    user = await loginEmail({ email, password });
   } else if (userName) {
-    return await loginUserName({ userName, password });
+    user = await loginUserName({ userName, password });
+  } else {
+    return {
+      status: 400,
+      error: "you have to send email or userName field",
+    };
   }
 
-  return;
+  if (!user)
+    return {
+      status: 404,
+      error: "user not found",
+    };
+
+  const token = jwt.sign(
+    {
+      _id: user._id,
+      email,
+    },
+    SECRET_KEY,
+    {
+      expiresIn: "3h",
+    }
+  );
+
+  user = {
+    userName: user.userName,
+    email: user.email,
+    token,
+  };
+
+  return user;
 };
 
 const loginEmail = async ({ email, password }: LoginEmailDTO) => {
