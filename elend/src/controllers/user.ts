@@ -39,6 +39,7 @@ export const login = async ({ password, email, userName }: LoginDTO) => {
     {
       _id: user._id,
       email,
+      role: user.type,
     },
     SECRET_KEY,
     {
