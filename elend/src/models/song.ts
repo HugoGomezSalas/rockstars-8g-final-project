@@ -26,3 +26,23 @@ const schema = new Schema<Song>({
 });
 
 export const SongModel = model<Song>("songs", schema);
+
+export interface getSongByIdDTO {
+  _id: string;
+}
+export interface CreateSongDTO {
+  name: string;
+  singer: Singer;
+  album?: Album;
+  price?: number;
+}
+export interface UpdateSongDTO {
+  _id: string;
+  name: string;
+  singer: Singer;
+  album?: Album;
+  price?: number;
+}
+export interface deleteSongDTO {
+  _id: string;
+}

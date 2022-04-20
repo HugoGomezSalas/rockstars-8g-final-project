@@ -9,6 +9,27 @@ import {
   getGenreById,
   updateGenre,
 } from "./controllers/genre";
+import {
+  createSinger,
+  deleteSinger,
+  getAllSingers,
+  getSingerById,
+  updateSinger,
+} from "./controllers/singer";
+import {
+  createSong,
+  deleteSong,
+  getAllSongs,
+  getSongById,
+  updateSong,
+} from "./controllers/song";
+import {
+  createAlbum,
+  deleteAlbum,
+  getAlbumById,
+  getAllAlbums,
+  updateAlbum,
+} from "./controllers/album";
 
 const app = express();
 
@@ -22,6 +43,113 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.set("secretKey", process.env.SECRET_KEY);
+
+app.delete("/album/:_id", async (req, res) => {
+  const album = await deleteAlbum({
+    _id: req.params._id,
+  });
+
+  res.send(album);
+});
+
+app.patch("/album/:_id", async (req, res) => {
+  const album = await updateAlbum({
+    _id: req.params._id,
+    ...req.body,
+  });
+
+  res.send(album);
+});
+
+app.post("/album", async (req, res) => {
+  const album = await createAlbum(req.body);
+
+  res.send(album);
+});
+
+app.get("/album/:_id", async (req, res) => {
+  const album = await getAlbumById({ _id: req.params._id });
+  res.send(album);
+});
+
+app.get("/album", async (req, res) => {
+  const albums = await getAllAlbums();
+  res.send(albums);
+});
+
+app.delete("/album/:_id", async (req, res) => {
+  const album = await deleteAlbum({
+    _id: req.params._id,
+  });
+
+  res.send(album);
+});
+
+app.delete("/song/:_id", async (req, res) => {
+  const song = await deleteSong({
+    _id: req.params._id,
+  });
+
+  res.send(song);
+});
+
+app.patch("/song/:_id", async (req, res) => {
+  const song = await updateSong({
+    _id: req.params._id,
+    ...req.body,
+  });
+
+  res.send(song);
+});
+
+app.post("/song", async (req, res) => {
+  const song = await createSong(req.body);
+
+  res.send(song);
+});
+
+app.get("/song/:_id", async (req, res) => {
+  const song = await getSongById({ _id: req.params._id });
+  res.send(song);
+});
+
+app.get("/song", async (req, res) => {
+  const songs = await getAllSongs();
+  res.send(songs);
+});
+
+app.delete("/singer/:_id", async (req, res) => {
+  const singer = await deleteSinger({
+    _id: req.params._id,
+  });
+
+  res.send(singer);
+});
+
+app.patch("/singer/:_id", async (req, res) => {
+  const singer = await updateSinger({
+    _id: req.params._id,
+    ...req.body,
+  });
+
+  res.send(singer);
+});
+
+app.post("/singer", async (req, res) => {
+  const singer = await createSinger(req.body);
+
+  res.send(singer);
+});
+
+app.get("/singer/:_id", async (req, res) => {
+  const singer = await getSingerById({ _id: req.params._id });
+  res.send(singer);
+});
+
+app.get("/singer", async (req, res) => {
+  const singers = await getAllSingers();
+  res.send(singers);
+});
 
 app.delete("/genre/:_id", async (req, res) => {
   const genre = await deleteGenre({

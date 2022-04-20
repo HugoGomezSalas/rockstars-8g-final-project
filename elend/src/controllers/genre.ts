@@ -7,11 +7,25 @@ import {
 } from "../models/genre";
 
 export const getAllGenres = async () => {
-  return await GenreModel.find();
+  try {
+    return await GenreModel.find();
+  } catch (err) {
+    return {
+      status: 500,
+      error: err,
+    };
+  }
 };
 
 export const getGenreById = async ({ _id }: getGenreByIdDTO) => {
-  return await GenreModel.findById(_id);
+  try {
+    return await GenreModel.findById(_id);
+  } catch (err) {
+    return {
+      status: 500,
+      error: err,
+    };
+  }
 };
 
 export const createGenre = async ({ description }: CreateGenreDTO) => {
@@ -20,10 +34,16 @@ export const createGenre = async ({ description }: CreateGenreDTO) => {
       status: 400,
       error: "description is required",
     };
-
-  return await GenreModel.create({
-    description,
-  });
+  try {
+    return await GenreModel.create({
+      description,
+    });
+  } catch (err) {
+    return {
+      status: 500,
+      error: err,
+    };
+  }
 };
 
 export const updateGenre = async ({ _id, description }: UpdateGenreDTO) => {
@@ -39,15 +59,22 @@ export const updateGenre = async ({ _id, description }: UpdateGenreDTO) => {
       error: "description is required",
     };
 
-  return await GenreModel.findByIdAndUpdate(
-    _id,
-    {
-      description,
-    },
-    {
-      new: true,
-    }
-  );
+  try {
+    return await GenreModel.findByIdAndUpdate(
+      _id,
+      {
+        description,
+      },
+      {
+        new: true,
+      }
+    );
+  } catch (err) {
+    return {
+      status: 500,
+      error: err,
+    };
+  }
 };
 
 export const deleteGenre = async ({ _id }: deleteGenreDTO) => {
@@ -57,7 +84,14 @@ export const deleteGenre = async ({ _id }: deleteGenreDTO) => {
       error: "_id is required",
     };
 
-  return await GenreModel.findByIdAndDelete(_id, {
-    new: true,
-  });
+  try {
+    return await GenreModel.findByIdAndDelete(_id, {
+      new: true,
+    });
+  } catch (err) {
+    return {
+      status: 500,
+      error: err,
+    };
+  }
 };

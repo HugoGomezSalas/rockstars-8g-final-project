@@ -27,3 +27,28 @@ const schema = new Schema<Album>({
 });
 
 export const AlbumModel = model<Album>("albums", schema);
+
+export interface getAlbumByIdDTO {
+  _id: string;
+}
+export interface CreateAlbumDTO {
+  name: string;
+  releaseDate: string;
+  singer: string;
+  songs: Song[];
+  price: number;
+  genre: Genre;
+  stock: number;
+}
+export interface UpdateAlbumDTO {
+  _id: string;
+  releaseDate: string;
+  name: string;
+  singer: string;
+  songs: Song[];
+  price: number;
+  genre: Genre;
+}
+export interface deleteAlbumDTO {
+  _id: string;
+}
