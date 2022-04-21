@@ -8,6 +8,7 @@ export interface Singer {
   name: string;
   lastName: string;
   nationality: string;
+  image: string;
 }
 
 const schema = new Schema<Singer>({
@@ -15,6 +16,7 @@ const schema = new Schema<Singer>({
   name: { type: String, required: true },
   lastName: { type: String, required: true },
   nationality: { type: String, required: true },
+  image: { type: String, required: true },
 });
 
 export const SingerModel = model<Singer>("singers", schema);

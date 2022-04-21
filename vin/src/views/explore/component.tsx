@@ -3,20 +3,22 @@ import AlbumCard from "../../components/cards/album/component";
 import SingerCard from "../../components/cards/singer/component";
 import { Styles } from "../../theme/types";
 import { getSingers } from "../../services/singer";
+import { getAlbums } from "../../services/album";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useAppSelector } from "../../app/hooks";
+import { albumsSelector, singersSelector } from "../../features/musicSlice";
 
 const Explore = () => {
   const dispatch = useDispatch();
 
-  const singers = useAppSelector((state) => state.singers.singers);
+  const singers = useAppSelector(singersSelector);
+  const albums = useAppSelector(albumsSelector);
 
   useEffect(() => {
     dispatch(getSingers());
+    dispatch(getAlbums());
   }, [dispatch]);
-
-  console.log(singers);
 
   const styles: Styles = {
     title: {
@@ -61,24 +63,13 @@ const Explore = () => {
           Últimos álbumes.
         </Typography>
         <Box sx={styles.albumsList}>
-          <AlbumCard
-            image="https://www.criticaspolares.com/wp-content/uploads/2021/10/critica-music-of-the-spheres-coldplay-2021.fin_.jpg"
-            songs={20}
-            stock={100}
-            title="Music of the Spheres"
-          />
-          <AlbumCard
-            image="https://www.criticaspolares.com/wp-content/uploads/2021/10/critica-music-of-the-spheres-coldplay-2021.fin_.jpg"
-            songs={20}
-            stock={100}
-            title="Music of the Spheres"
-          />
-          <AlbumCard
-            image="https://www.criticaspolares.com/wp-content/uploads/2021/10/critica-music-of-the-spheres-coldplay-2021.fin_.jpg"
-            songs={20}
-            stock={100}
-            title="Music of the Spheres"
-          />
+          {albums.map((album) => (
+            <AlbumCard
+              {...album}
+              key={`album-${album._id}`}
+              songs={album.songs.length}
+            />
+          ))}
         </Box>
         <Box sx={styles.singersContainer}>
           <Typography variant="h6" sx={styles.subtitle}>
@@ -86,10 +77,7 @@ const Explore = () => {
           </Typography>
           <Box sx={styles.singerList}>
             {singers.map((singer) => (
-              <SingerCard
-                image="https://studiosol-a.akamaihd.net/uploadfile/letras/fotos/d/0/f/6/d0f69962abab3790a9bbf048c57bdf10.jpg"
-                title={singer.name}
-              />
+              <SingerCard {...singer} key={`singer-${singer._id}`} />
             ))}
           </Box>
         </Box>

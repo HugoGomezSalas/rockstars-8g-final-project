@@ -1,10 +1,10 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import singerReducer from "../features/singerSlice";
+import musicReducer from "../features/musicSlice";
 import loaderReducer from "../features/loaderSlice";
 
 export const store = configureStore({
   reducer: {
-    singers: singerReducer,
+    music: musicReducer,
     loader: loaderReducer,
   },
 });

@@ -1,4 +1,4 @@
-export interface singerCardProps {
+export interface SingerCardProps {
   image: string;
-  title: string;
+  name: string;
 }

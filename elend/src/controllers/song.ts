@@ -6,9 +6,20 @@ import {
   UpdateSongDTO,
 } from "../models/song";
 
-export const getAllSongs = async () => {
+export const getAllSongsNested = async () => {
   try {
     return await SongModel.find().populate("singer");
+  } catch (err) {
+    return {
+      status: 500,
+      error: err,
+    };
+  }
+};
+
+export const getAllSongs = async () => {
+  try {
+    return await SongModel.find();
   } catch (err) {
     return {
       status: 500,

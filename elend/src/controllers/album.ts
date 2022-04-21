@@ -6,12 +6,23 @@ import {
   UpdateAlbumDTO,
 } from "../models/album";
 
-export const getAllAlbums = async () => {
+export const getAllAlbumsNested = async () => {
   try {
     return await AlbumModel.find()
       .populate("songs")
       .populate("singer")
       .populate("genre");
+  } catch (err) {
+    return {
+      status: 500,
+      error: err,
+    };
+  }
+};
+
+export const getAllAlbums = async () => {
+  try {
+    return await AlbumModel.find();
   } catch (err) {
     return {
       status: 500,

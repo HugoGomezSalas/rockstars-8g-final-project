@@ -20,6 +20,7 @@ import {
   createSong,
   deleteSong,
   getAllSongs,
+  getAllSongsNested,
   getSongById,
   updateSong,
 } from "./controllers/song";
@@ -28,6 +29,7 @@ import {
   deleteAlbum,
   getAlbumById,
   getAllAlbums,
+  getAllAlbumsNested,
   updateAlbum,
 } from "./controllers/album";
 import { validateAdmin, validateToken } from "./modules/auth";
@@ -78,6 +80,11 @@ app.get("/album", async (req, res) => {
   res.send(albums);
 });
 
+app.get("/album/nested", async (req, res) => {
+  const albums = await getAllAlbumsNested();
+  res.send(albums);
+});
+
 app.delete("/album/:_id", validateAdmin, async (req, res) => {
   const album = await deleteAlbum({
     _id: req.params._id,
@@ -116,6 +123,11 @@ app.get("/song/:_id", async (req, res) => {
 
 app.get("/song", async (req, res) => {
   const songs = await getAllSongs();
+  res.send(songs);
+});
+
+app.get("/song/nested", async (req, res) => {
+  const songs = await getAllSongsNested();
   res.send(songs);
 });
 

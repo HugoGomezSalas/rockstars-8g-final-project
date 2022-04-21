@@ -3,7 +3,7 @@ import { FC } from "react";
 import { Styles } from "../../../theme/types";
 import { SingerCardProps } from "./types";
 
-const SingerCard: FC<SingerCardProps> = ({ image, title }) => {
+const SingerCard: FC<SingerCardProps> = ({ image, name }) => {
   const styles: Styles = {
     container: {
       width: "250px",
@@ -21,10 +21,7 @@ const SingerCard: FC<SingerCardProps> = ({ image, title }) => {
       overflow: "hidden",
       marginBottom: "20px",
     },
-    image: {
-      height: "250px",
-      width: "auto",
-    },
+    image: {},
     title: {
       fontSize: "1.2rem",
       fontWeight: "bold",
@@ -32,12 +29,17 @@ const SingerCard: FC<SingerCardProps> = ({ image, title }) => {
     },
   };
 
+  const imageStyle = {
+    height: "250px",
+    width: "auto",
+  };
+
   return (
     <Box sx={styles.container}>
       <Box sx={styles.imageContainer}>
-        <img style={styles.image} src={image} alt={`Singer-${title}`} />
+        <img style={imageStyle} src={image} alt={`Singer-${name}`} />
       </Box>
-      <Typography sx={styles.title}>{title}</Typography>
+      <Typography sx={styles.title}>{name}</Typography>
     </Box>
   );
 };

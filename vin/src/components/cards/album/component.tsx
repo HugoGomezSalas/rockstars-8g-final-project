@@ -3,17 +3,10 @@ import { FC } from "react";
 import { Styles } from "../../../theme/types";
 import { AlbumCardProps } from "./types";
 
-const AlbumCard: FC<AlbumCardProps> = ({ image, songs, stock, title }) => {
+const AlbumCard: FC<AlbumCardProps> = ({ image, songs, stock, name }) => {
   const styles: Styles = {
     container: {
       width: "300px",
-    },
-    image: {
-      width: "300px",
-      height: "300px",
-      borderRadius: "10px",
-      boxShadow:
-        "0 1px 1px hsl(0deg 0% 0% / 0.075), 0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075), 0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075)",
     },
     title: {
       fontSize: "1.2rem",
@@ -33,10 +26,18 @@ const AlbumCard: FC<AlbumCardProps> = ({ image, songs, stock, title }) => {
     },
   };
 
+  const imageStyle = {
+    width: "300px",
+    height: "300px",
+    borderRadius: "10px",
+    boxShadow:
+      "0 1px 1px hsl(0deg 0% 0% / 0.075), 0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075), 0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075)",
+  };
+
   return (
     <Box sx={styles.container}>
-      <img style={styles.image} src={image} alt={`album-${title}`} />
-      <Typography sx={styles.title}>{title}</Typography>
+      <img style={imageStyle} src={image} alt={`album-${name}`} />
+      <Typography sx={styles.title}>{name}</Typography>
       <Box sx={styles.bottom}>
         <Typography sx={styles.info}>{`${songs} Songs`}</Typography>
         <Typography sx={styles.info}>{`Stock (${stock})`}</Typography>

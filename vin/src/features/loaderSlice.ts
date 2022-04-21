@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface LoaderState {
-  loading: Loader[];
+  loading: boolean;
 }
 
 const initialState: LoaderState = {
