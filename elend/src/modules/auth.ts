@@ -49,10 +49,9 @@ export const validateRequestImplementation = (
             });
           } else {
             req.body.decode = decode;
+            next();
           }
         }
-
-        next();
       }
     });
   }

@@ -68,12 +68,12 @@ app.post("/album", validateAdmin, async (req, res) => {
   res.send(album);
 });
 
-app.get("/album/:_id", validateToken, async (req, res) => {
+app.get("/album/:_id", async (req, res) => {
   const album = await getAlbumById({ _id: req.params._id });
   res.send(album);
 });
 
-app.get("/album", validateToken, async (req, res) => {
+app.get("/album", async (req, res) => {
   const albums = await getAllAlbums();
   res.send(albums);
 });
@@ -109,12 +109,12 @@ app.post("/song", validateAdmin, async (req, res) => {
   res.send(song);
 });
 
-app.get("/song/:_id", validateToken, async (req, res) => {
+app.get("/song/:_id", async (req, res) => {
   const song = await getSongById({ _id: req.params._id });
   res.send(song);
 });
 
-app.get("/song", validateToken, async (req, res) => {
+app.get("/song", async (req, res) => {
   const songs = await getAllSongs();
   res.send(songs);
 });
@@ -142,12 +142,12 @@ app.post("/singer", validateAdmin, async (req, res) => {
   res.send(singer);
 });
 
-app.get("/singer/:_id", validateToken, async (req, res) => {
+app.get("/singer/:_id", async (req, res) => {
   const singer = await getSingerById({ _id: req.params._id });
   res.send(singer);
 });
 
-app.get("/singer", validateToken, async (req, res) => {
+app.get("/singer", async (req, res) => {
   const singers = await getAllSingers();
   res.send(singers);
 });
@@ -175,12 +175,12 @@ app.post("/genre", validateAdmin, async (req, res) => {
   res.send(genre);
 });
 
-app.get("/genre/:_id", validateToken, async (req, res) => {
+app.get("/genre/:_id", async (req, res) => {
   const genre = await getGenreById({ _id: req.params._id });
   res.send(genre);
 });
 
-app.get("/genre", validateToken, async (req, res) => {
+app.get("/genre", async (req, res) => {
   const genres = await getAllGenres();
   res.send(genres);
 });
