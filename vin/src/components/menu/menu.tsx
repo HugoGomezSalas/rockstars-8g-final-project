@@ -20,9 +20,14 @@ import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import MicExternalOnIcon from "@mui/icons-material/MicExternalOn";
+import { useAdmin } from "../../hooks/admin";
 
 const Menu = () => {
   const [adminOpen, setAdminOpen] = useState(false);
+
+  const { isAdmin } = useAdmin();
+
+  console.log(isAdmin);
 
   const toggleAdminMenu = () => {
     setAdminOpen((actualValue) => !actualValue);
@@ -103,28 +108,32 @@ const Menu = () => {
             <ListItemText primary={button.text} />
           </ListItem>
         ))}
-        <ListItem button onClick={toggleAdminMenu} sx={styles.drawerItem}>
-          <ListItemIcon>
-            <AdminPanelSettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Admin" />
-          {adminOpen ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={adminOpen} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            {adminButtons.map((button, index) => (
-              <ListItem
-                button
-                key={`NavButton-${button.text}-${index}`}
-                onClick={button.onClick}
-                sx={styles.drawerItem}
-              >
-                <ListItemIcon>{button.icon}</ListItemIcon>
-                <ListItemText primary={button.text} />
-              </ListItem>
-            ))}
-          </List>
-        </Collapse>
+        {isAdmin && (
+          <>
+            <ListItem button onClick={toggleAdminMenu} sx={styles.drawerItem}>
+              <ListItemIcon>
+                <AdminPanelSettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Admin" />
+              {adminOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={adminOpen} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {adminButtons.map((button, index) => (
+                  <ListItem
+                    button
+                    key={`NavButton-${button.text}-${index}`}
+                    onClick={button.onClick}
+                    sx={styles.drawerItem}
+                  >
+                    <ListItemIcon>{button.icon}</ListItemIcon>
+                    <ListItemText primary={button.text} />
+                  </ListItem>
+                ))}
+              </List>
+            </Collapse>
+          </>
+        )}
       </List>
     </Drawer>
   );

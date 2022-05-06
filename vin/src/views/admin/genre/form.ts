@@ -1,4 +1,3 @@
-import { FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { store } from "../../../app/store";
 import { fetchAddGenre, fetchUpdateGenre } from "../../../services/genre";
@@ -36,10 +35,7 @@ export const initialValuesUpdate: UpdateGenreDTO = {
   description: "",
 };
 
-export const createGenre = (
-  values: CreateGenreDTO,
-  formikHelpers: FormikHelpers<CreateGenreDTO>
-) => {
+export const createGenre = (values: CreateGenreDTO) => {
   store.dispatch(fetchAddGenre(values));
 };
 
